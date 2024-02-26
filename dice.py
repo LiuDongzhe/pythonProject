@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+
 class die:
     def __init__(self, numSides=6, probSides=None, numDie=1):
         if probSides is None:
@@ -21,7 +22,8 @@ class die:
     def throwDice(self, totalNum):
         self.totalNum = totalNum
         for i in range(self.numDie):
-            self.result.append(list(np.random.choice(a=self.numSides, size=self.totalNum, replace=True, p=self.probSides)))
+            self.result.append(
+                list(np.random.choice(a=self.numSides, size=self.totalNum, replace=True, p=self.probSides)))
 
     def compare(self):
         tmp = np.array(self.result).T
@@ -48,4 +50,3 @@ if __name__ == '__main__':
     die1.compare()
     die1.printDie()
     die1.printGraph()
-
