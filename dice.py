@@ -28,7 +28,7 @@ class die:
                 self.result.append(list(np.random.choice(a=self.numSides, size=self.totalNum, replace=True, p=self.probSides)))
         else:
             for prob in self.probSides:
-                tmp.append(list(np.random.choice(a=self.numSides, size=self.totalNum, replace=True, p=prob)))
+                tmp.append(list(np.random.choice(a=len(prob), size=self.totalNum, replace=True, p=prob)))
             self.result.append(tmp)
 
     def compare(self):
@@ -48,7 +48,7 @@ class die:
     def printGraph(self):
         x = [i for i in range(self.totalNum)]
         plt.plot(x, self.ans)
-        plt.ylim(0, 1.0)
+        # plt.ylim(0, 1.0)
         plt.xlabel('Frequency')
         plt.ylabel('Probability')
         plt.title(f'Total Probability: {self.ans[-1]}')
@@ -64,12 +64,9 @@ if __name__ == '__main__':
     die1.printGraph()
     # prob = [[1/6, 1/6, 1/6, 1/6, 1/6, 1/6],
     #         [1/8, 2/8, 1/8, 1/8, 2/8, 1/8],
-    #         [1/8, 1/8, 1/8, 1/8, 1/8, 3/8],
-    #         [1/6, 1/6, 1/6, 1/6, 1/6, 1/6],
-    #         [1/8, 2/8, 1/8, 1/8, 2/8, 1/8],
-    #         [1/8, 1/8, 1/8, 1/8, 1/8, 3/8]]
-    # die2 = die(numDie=6, probSides=prob, fair=False)
+    #         [1/8, 1/8, 1/8, 1/8, 1/8, 1/8, 1/8, 1/8]]
+    # die2 = die(numDie=3, probSides=prob, fair=False)
     # die2.throwDice(5000)
     # die2.compare()
-    # die2.printDie()
+    # # die2.printDie()
     # die2.printGraph()
