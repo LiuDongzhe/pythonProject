@@ -6,6 +6,11 @@ class die:
     def __init__(self, numSides=6, probSides=None, numDie=1, fair=True):
         if probSides is None:
             probSides = [1 / numSides for _ in range(numSides)]
+        # if not isinstance(probSides, list) or not all(isinstance(sub_list, list) for sub_list in probSides):
+        #     raise ValueError("probSides must be a 2D list")
+        for subList in probSides:
+            if abs(sum(subList) - 1) > 1e9:
+                raise ValueError("Each sublist in probSides must sum up to 1")
         self.numSides = [i for i in range(1, numSides + 1)]
         self.probSides = probSides
         self.numDie = numDie
@@ -56,17 +61,17 @@ class die:
 
 
 if __name__ == '__main__':
+    # die1 = die(numDie=6)
+    # die1.throwDice(10000)
+    # die1.compare()
+    # # die1.printDie()
+    # die1.printGraph()
+    prob = [[1/6, 1/6, 1/6, 1/6, 1/6, 1/6],
+            [1/8, 2/8, 1/8, 1/8, 2/8, 1/8],
+            [1/8, 1/8, 1/8, 1/8, 1/8, 1/8, 1/8, 1/8]]
+    die2 = die(numDie=3, probSides=prob, fair=False)
+    die2.throwDice(5000)
+    die2.compare()
+    # die2.printDie()
+    die2.printGraph()
 
-    die1 = die(numDie=6)
-    die1.throwDice(10000)
-    die1.compare()
-    # die1.printDie()
-    die1.printGraph()
-    # prob = [[1/6, 1/6, 1/6, 1/6, 1/6, 1/6],
-    #         [1/8, 2/8, 1/8, 1/8, 2/8, 1/8],
-    #         [1/8, 1/8, 1/8, 1/8, 1/8, 1/8, 1/8, 1/8]]
-    # die2 = die(numDie=3, probSides=prob, fair=False)
-    # die2.throwDice(5000)
-    # die2.compare()
-    # # die2.printDie()
-    # die2.printGraph()
