@@ -14,22 +14,23 @@ class poker:
         self.ans = []
 
     def printCards(self):
+        # print(self.deck)
         print(self.res)
         print(self.ans)
 
     def shuffleCards(self):
+        self.deck = [(suit, card) for suit in self.suits for card in self.cards]
         np.random.shuffle(self.deck)
 
     def drawCards(self, drawNum, totalNum):
         self.totalNum = totalNum
         tmp = []
         for i in range(totalNum):
-            t = self.deck
+            self.shuffleCards()
             for j in range(drawNum):
-                card = random.choice(t)
+                card = self.deck[0]
                 tmp.append(card)
-                t = t.remove(card)
-
+                self.deck.remove(card)
             self.res.append(tmp)
             tmp = []
 
@@ -58,14 +59,15 @@ class poker:
         plt.title(f'the probability is: {self.ans[-1]}')
         plt.xlabel('Frequency')
         plt.ylabel('Probability')
-        plt.ylim(0, 0.01)
+        # plt.ylim(0, 1.0)
         plt.show()
 
 
 if __name__ == "__main__":
     poker1 = poker()
     poker1.shuffleCards()
-    poker1.drawCards(drawNum=2, totalNum=10000)
+    # poker1.printCards()
+    poker1.drawCards(drawNum=5, totalNum=1000000)
     poker1.compare()
     # poker1.printCards()
     poker1.printGraph()
