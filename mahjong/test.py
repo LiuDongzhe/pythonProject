@@ -3,25 +3,24 @@ import pygame as pg
 from mahjong import mahjong
 
 
-def func(card):
-    pg.init()
+def loadImage(card):
+    imageLst = []
 
-    screen = pg.display.set_mode((1600, 900))
+    if isinstance(card, list):
+        for subCard in card:
+            imageLst.append(pg.image.load(f'image/128/fulltiles/{subCard}.png').convert_alpha())
+    else:
+        imageLst.append(pg.image.load(f'image/128/fulltiles/{card}.png').convert_alpha())
 
-    screen.fill((0, 100, 0))
+    return imageLst
 
-    pg.display.set_caption('MahJong')
 
-    cardImage = pg.image.load(f'image/128/fulltiles/{card}.png').convert_alpha()
-    # card = pg.image.load(f'image/128/fulltiles/white.png').convert()
-    # cimage.fill((0, 0, 255), special_flags=0)
-    # cimage.scroll(100, 50)
+def handShow(screen, imageLst):
+    i = 115 * (len(imageLst) - 1)
+    for subImage in imageLst:
+        screen.blit(subImage, (i, 600))
+        i -= 115
 
-    while True:
-        for event in pg.event.get():
-            if event.type == pg.QUIT:
-                pg.quit()
-                sys.exit()
-        # pg.display.flip()
-        screen.blit(cardImage, (0, 600))
-        pg.display.update()
+
+def preHandShow(screen, image):
+    screen.blit(image, (1400, 400))

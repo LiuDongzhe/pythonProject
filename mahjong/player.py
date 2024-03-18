@@ -8,7 +8,22 @@ class player:
         self.dropHand = None
 
     def sortHand(self):
-        pass
+        """
+        the order is:
+        bamboo, circle, wan, west, south, east, north, red, green, white
+        """
+        tmp = []
+        others = ['west', 'south', 'east', 'north', 'red', 'green', 'white']
+        for card in self.hand:
+            if card in others:
+                tmp.append(card)
+                self.hand.remove(card)
+
+        tmp.sort()
+        self.hand.sort(reverse=True)
+        for card in self.hand:
+            tmp.append(card)
+        self.hand = tmp
 
     def getHand(self):
         if self.preHand is not None:
@@ -24,3 +39,14 @@ class player:
             self.hand.remove(card)
         elif self.preHand == card:
             self.preHand = None
+
+
+if __name__ == '__main__':
+    p = player()
+    m = mahjong()
+    for i in range(13):
+        p.getPreHand(m.drawCard())
+        p.getHand()
+
+    p.sortHand()
+    print(p.hand)
