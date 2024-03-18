@@ -3,10 +3,6 @@ import pygame as pg
 from mahjong import mahjong
 
 
-m = mahjong()
-c = m.drawCard()
-
-
 def func(card):
     pg.init()
 
@@ -16,7 +12,7 @@ def func(card):
 
     pg.display.set_caption('MahJong')
 
-    card = pg.image.load(f'image/128/fulltiles/{c}.png').convert_alpha()
+    cardImage = pg.image.load(f'image/128/fulltiles/{card}.png').convert_alpha()
     # card = pg.image.load(f'image/128/fulltiles/white.png').convert()
     # cimage.fill((0, 0, 255), special_flags=0)
     # cimage.scroll(100, 50)
@@ -27,5 +23,5 @@ def func(card):
                 pg.quit()
                 sys.exit()
         # pg.display.flip()
-        screen.blit(card, (0, 600))
+        screen.blit(cardImage, (0, 600))
         pg.display.update()
