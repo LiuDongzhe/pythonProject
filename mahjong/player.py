@@ -8,16 +8,17 @@ class player:
         self.dropHand = None
 
     def sortHand(self):
-        """
-        the order is:
-        bamboo, circle, wan, west, south, east, north, red, green, white
-        """
         tmp = []
         others = ['west', 'south', 'east', 'north', 'red', 'green', 'white']
+        removeCards = []
+
         for card in self.hand:
             if card in others:
                 tmp.append(card)
-                self.hand.remove(card)
+                removeCards.append(card)
+
+        for card in removeCards:
+            self.hand.remove(card)
 
         tmp.sort()
         self.hand.sort(reverse=True)
@@ -44,9 +45,8 @@ class player:
 if __name__ == '__main__':
     p = player()
     m = mahjong()
-    for i in range(13):
-        p.getPreHand(m.drawCard())
-        p.getHand()
+
+    p.hand = ['bamboo1', 'south', 'east', 'bamboo2', 'bamboo7', 'wan2', 'wan4', 'circle1', 'circle7', 'white', 'red', 'east']
 
     p.sortHand()
     print(p.hand)

@@ -25,6 +25,7 @@ if p.preHand is not None:
     preRectLst = loadRect(p.preHand)
 
 while True:
+    screen.fill((0, 100, 0))
     handShow(screen, imageLst, rectLst)
     if p.preHand is not None:
         preHandShow(screen, preImageLst[0], preRectLst[0])
@@ -38,3 +39,4 @@ while True:
             clickPreHand(p.preHand, preRectLst[0])
 
     pg.display.update()
+    pg.display.flip()

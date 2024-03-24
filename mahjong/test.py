@@ -48,10 +48,17 @@ def clickHand(hand, rectLst):
 
     for subRect in rectLst:
         if subRect.collidepoint(mousePos):
+            subRect.y -= 20
             print(f'{hand[rectLst.index(subRect)]} clicked!')
+        else:
+            subRect.y = 650
 
 
 def clickPreHand(preHand, rect):
     mousePos = pg.mouse.get_pos()
+
     if rect.collidepoint(mousePos):
+        rect.y -= 20
         print(f'{preHand} clicked!')
+    else:
+        rect.y = 650
