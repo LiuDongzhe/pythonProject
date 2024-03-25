@@ -45,8 +45,6 @@ class player:
 if __name__ == '__main__':
     p = player()
     m = mahjong()
-
     p.hand = ['bamboo1', 'south', 'east', 'bamboo2', 'bamboo7', 'wan2', 'wan4', 'circle1', 'circle7', 'white', 'red', 'east']
-
     p.sortHand()
     print(p.hand)
