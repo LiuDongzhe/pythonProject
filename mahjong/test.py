@@ -62,3 +62,6 @@ def clickPreHand(preHand, rect):
         print(f'{preHand} clicked!')
     else:
         rect.y = 650
+
+#test
+        
