@@ -14,6 +14,16 @@ def loadImage(card):
 
     return imageLst
 
+def loadImageDropDesk(card):
+    imageLst = []
+
+    if isinstance(card, list):
+        for subCard in card:
+            imageLst.append(pg.image.load(f'image/32/fulltiles/{subCard}.png').convert_alpha())
+    else:
+        imageLst.append(pg.image.load(f'image/32/fulltiles/{card}.png').convert_alpha())
+
+    return imageLst
 
 def loadRect(imageLst):
     rectLst = []
@@ -21,10 +31,10 @@ def loadRect(imageLst):
     i = 85 * (len(imageLst) - 1)
     if isinstance(imageLst, list):
         for _ in imageLst:
-            rectLst.append(pg.Rect(i, 650, 96, 133))
+            rectLst.append(pg.Rect(i, 650, 86, 133))
             i -= 85
     else:
-        rectLst.append(pg.Rect(1200, 650, 96, 133))
+        rectLst.append(pg.Rect(1200, 650, 86, 133))
         # rectLst.append(pg.Rect(0, 0, 96, 133))
 
     return rectLst
@@ -48,7 +58,7 @@ def clickHand(hand, rectLst):
 
     for subRect in rectLst:
         if subRect.collidepoint(mousePos):
-            subRect.y -= 20
+            subRect.y = 630
             print(f'{hand[rectLst.index(subRect)]} clicked!')
         else:
             subRect.y = 650
@@ -58,10 +68,7 @@ def clickPreHand(preHand, rect):
     mousePos = pg.mouse.get_pos()
 
     if rect.collidepoint(mousePos):
-        rect.y -= 20
+        rect.y = 630
         print(f'{preHand} clicked!')
     else:
         rect.y = 650
-
-#test
-        
