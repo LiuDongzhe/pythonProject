@@ -2,7 +2,6 @@ import sys
 import pygame as pg
 from mahjong import mahjong
 
-
 def loadImage(card):
     imageLst = []
 
@@ -14,6 +13,16 @@ def loadImage(card):
 
     return imageLst
 
+def loadAIImage(card):
+    AIimageLst = []
+
+    if isinstance(card, list):
+        for subCard in card:
+            AIimageLst.append(pg.image.load(f'image/96/fulltiles/{subCard}.png').convert_alpha())
+    else:
+        AIimageLst.append(pg.image.load(f'image/96/fulltiles/{card}.png').convert_alpha())
+
+    return AIimageLst
 
 def loadRect(imageLst):
     rectLst = []
@@ -21,23 +30,34 @@ def loadRect(imageLst):
     i = 85 * (len(imageLst) - 1)
     if isinstance(imageLst, list):
         for _ in imageLst:
-            rectLst.append(pg.Rect(i, 650, 96, 133))
+            rectLst.append(pg.Rect(i, 450, 96, 133))
             i -= 85
     else:
-        rectLst.append(pg.Rect(1200, 650, 96, 133))
+        rectLst.append(pg.Rect(1200, 450, 96, 133))
         # rectLst.append(pg.Rect(0, 0, 96, 133))
-
     return rectLst
+def loadAIRect(AIimageLst):
+    rectAILst = []
 
-
-def handShow(screen, imageLst, rectLst):
+    i = 85 * (len(AIimageLst) - 1)
+    if isinstance(AIimageLst, list):
+        for _ in AIimageLst:
+            rectAILst.append(pg.Rect(i, 450, 40, 133))
+            i -= 85
+    else:
+        rectAILst.append(pg.Rect(1200, 450, 40, 133))
+        # rectLst.append(pg.Rect(0, 0, 96, 133))
+    return rectAILst
+def handShow(screen, imageLst,rectLst):
     # i = 85 * (len(imageLst) - 1)
     for subImage, subRect in zip(imageLst, rectLst):
         screen.blit(subImage, subRect)
         # screen.blit(subImage, (i, 650))
         # i -= 85
 
-
+def AIHandShow(screen, AIimageLst, rectAILst):
+    for subImage, subRect in zip(AIimageLst, rectAILst):
+        screen.blit(subImage, subRect)
 def preHandShow(screen, image, rect):
     screen.blit(image, rect)
     # screen.blit(image, (1200, 650))
