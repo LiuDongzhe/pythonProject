@@ -4,8 +4,8 @@ from mahjong import mahjong
 class player:
     def __init__(self):
         self.hand = []
-        self.preHand = None
-        self.dropHand = None
+        self.preHand = []
+        self.dropHand = []
 
     def sortHand(self):
         tmp = []

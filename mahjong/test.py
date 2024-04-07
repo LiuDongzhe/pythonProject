@@ -18,16 +18,32 @@ def loadImage(card):
 def loadRect(imageLst):
     rectLst = []
 
-    i = 85 * (len(imageLst) - 1)
+    i = 85 * (len(imageLst))
     if isinstance(imageLst, list):
         for _ in imageLst:
             rectLst.append(pg.Rect(i, 650, 96, 133))
             i -= 85
     else:
-        rectLst.append(pg.Rect(1200, 650, 96, 133))
+        rectLst.append(pg.Rect(1285, 650, 96, 133))
         # rectLst.append(pg.Rect(0, 0, 96, 133))
 
     return rectLst
+
+def loadDroppedCard(imageLst):
+    dropList = []
+
+    i = 85 * (len(imageLst) )
+    if isinstance(imageLst, list):
+        for _ in imageLst:
+            dropList.append(pg.Rect(i, 450, 96, 133))
+            i += 85
+    else:
+        dropList.append(pg.Rect(1285, 400, 96, 133))
+        # rectLst.append(pg.Rect(0, 0, 96, 133))
+
+    return dropList
+
+
 
 
 def handShow(screen, imageLst, rectLst):
@@ -39,26 +55,54 @@ def handShow(screen, imageLst, rectLst):
 
 
 def preHandShow(screen, image, rect):
-    screen.blit(image, rect)
+    #screen.blit(image, rect)
+    for subImage, subRect in zip(image, rect):
+        screen.blit(subImage, subRect)
     # screen.blit(image, (1200, 650))
 
+def drophandShow(screen, imageLst, dropList):
+    # i = 85 * (len(imageLst) - 1)
+    for subImage, subDrop in zip(imageLst, dropList):
+        screen.blit(subImage, subDrop)
+        # screen.blit(subImage, (i, 650))
+        # i -= 85
 
-def clickHand(hand, rectLst):
+
+
+def clickHand(hand, imageLst, rectLst, dropHand:list):
+
     mousePos = pg.mouse.get_pos()
 
-    for subRect in rectLst:
-        if subRect.collidepoint(mousePos):
-            subRect.y = 630
-            print(f'{hand[rectLst.index(subRect)]} clicked!')
+    n = len(rectLst) - 1
+    while n >= 0:
+        if rectLst[n].collidepoint(mousePos) and rectLst[n].y > 610:
+            rectLst[n].y -= 20
+            print(f'{hand} clicked!')
+        elif rectLst[n].y == 610:  ##Add the position of double click to array of drop
+            dropHand.append(rectLst[n])
+            print(dropHand)
+            del rectLst[n]
+            del imageLst[n]
+
         else:
-            subRect.y = 650
+            rectLst[n].y = 650
+        n -= 1
+    return dropHand
 
-
-def clickPreHand(preHand, rect):
-    mousePos = pg.mouse.get_pos()
-
-    if rect.collidepoint(mousePos):
-        rect.y = 630
-        print(f'{preHand} clicked!')
-    else:
-        rect.y = 650
+# def clickPreHand(preHand, preImageLst, rect, preDropHand:list):
+#     mousePos = pg.mouse.get_pos()
+#     n = len(rect) - 1
+#     while n >= 0:
+#         if rect[n].collidepoint(mousePos) and rect[n].y > 610:
+#             rect[n].y -= 20
+#             print(f'{preHand} clicked!')
+#         elif rect[n].y == 610:  ##Add the position of double click to array of drop
+#             preDropHand.append(rect[n])
+#             del rect[n]
+#             del preImageLst[n]
+#             #rect[n].y == -200
+#
+#         else:
+#             rect[n].y = 650
+#
+#     return preDropHand
