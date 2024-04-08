@@ -2,7 +2,6 @@ import sys
 import pygame as pg
 from mahjong import mahjong
 
-
 def loadImage(card):
     imageLst = []
 
@@ -37,6 +36,9 @@ def loadRect(imageLst):
         rectLst.append(pg.Rect(1200, 650, 86, 133))
 
     return rectLst
+def loadAIRect(AIimageLst):
+    rectAILst = []
+
 
 def loadDroppedCard(imageLst):
     dropList = []
@@ -53,8 +55,6 @@ def loadDroppedCard(imageLst):
     return dropList
 
 
-
-
 def handShow(screen, imageLst, rectLst):
     # i = 85 * (len(imageLst) - 1)
     for subImage, subRect in zip(imageLst, rectLst):
@@ -62,7 +62,10 @@ def handShow(screen, imageLst, rectLst):
         # screen.blit(subImage, (i, 650))
         # i -= 85
 
-
+def AIHandShow(screen, AIimageLst, rectAILst):
+    for subImage, subRect in zip(AIimageLst, rectAILst):
+        screen.blit(subImage, subRect)
+        
 def preHandShow(screen, image, rect):
     #screen.blit(image, rect)
     for subImage, subRect in zip(image, rect):
@@ -75,8 +78,6 @@ def drophandShow(screen, imageLst, dropList):
         screen.blit(subImage, subDrop)
         # screen.blit(subImage, (i, 650))
         # i -= 85
-
-
 
 def clickHand(hand, imageLst, rectLst, dropHand:list):
 
