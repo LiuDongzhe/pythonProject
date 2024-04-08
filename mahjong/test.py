@@ -14,6 +14,16 @@ def loadImage(card):
 
     return imageLst
 
+def loadImageDropDesk(card):
+    imageLst = []
+
+    if isinstance(card, list):
+        for subCard in card:
+            imageLst.append(pg.image.load(f'image/32/fulltiles/{subCard}.png').convert_alpha())
+    else:
+        imageLst.append(pg.image.load(f'image/32/fulltiles/{card}.png').convert_alpha())
+
+    return imageLst
 
 def loadRect(imageLst):
     rectLst = []
@@ -21,11 +31,10 @@ def loadRect(imageLst):
     i = 85 * (len(imageLst))
     if isinstance(imageLst, list):
         for _ in imageLst:
-            rectLst.append(pg.Rect(i, 650, 96, 133))
+            rectLst.append(pg.Rect(i, 650, 86, 133))
             i -= 85
     else:
-        rectLst.append(pg.Rect(1285, 650, 96, 133))
-        # rectLst.append(pg.Rect(0, 0, 96, 133))
+        rectLst.append(pg.Rect(1200, 650, 86, 133))
 
     return rectLst
 

@@ -30,3 +30,6 @@ if __name__ == '__main__':
     print(len(m.printMahJong()))
     print(m.drawCard())
     print(len(m.printMahJong()))
+
+#test
+    
