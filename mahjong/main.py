@@ -33,21 +33,28 @@ if a.AIpreHand is not None:
     preImageAILst = loadImage(a.AIHand)
     preRectAILst = loadRect(a.AIHand)
 
+##From Cao
+if p.dropHand is not None:
+    dropImageLst = loadImage(p.dropHand)
+    dropDropLst = loadRect(p.dropHand)
+
+
 while True:
-    screen.fill((0, 100, 0))
+    screen.fill((0, 100, 0))  # The color of screen
     handShow(screen, imageLst, rectLst)
     AIHandShow(screen,AIimageLst,rectAILst)
     if p.preHand is not None:
-        preHandShow(screen, preImageLst[0], preRectLst[0])
-    if a.AIpreHand is not None:
-        preHandShow(screen, preImageAILst[0], preRectAILst[0])
+        preHandShow(screen, preImageLst, preRectLst)
+    if p.dropHand is not None:
+        drophandShow(screen, dropImageLst, p.dropHand)
     for event in pg.event.get():
         if event.type == pg.QUIT:
             pg.quit()
             sys.exit()
         if event.type == pg.MOUSEBUTTONDOWN:
-            clickHand(p.hand, rectLst)
-            clickPreHand(p.preHand, preRectLst[0])
+            clickHand(p.hand, imageLst, rectLst, p.dropHand)
+            clickHand(p.preHand, preImageLst, preRectLst, p.dropHand)#click prehand has bug
+
 
     pg.display.update()
     pg.display.flip()
