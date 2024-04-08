@@ -14,6 +14,7 @@ def loadImage(card):
 
     return imageLst
 
+
 def loadImageDropDesk(card):
     imageLst = []
 
@@ -24,6 +25,7 @@ def loadImageDropDesk(card):
         imageLst.append(pg.image.load(f'image/32/fulltiles/{card}.png').convert_alpha())
 
     return imageLst
+
 
 def loadRect(imageLst):
     rectLst = []

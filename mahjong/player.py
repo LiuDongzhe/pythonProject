@@ -42,6 +42,11 @@ class player:
             self.preHand = None
 
 
+class botPlayer(player):
+    def dropCard(self):
+        return
+
+
 if __name__ == '__main__':
     p = player()
     m = mahjong()
