@@ -71,3 +71,4 @@ if __name__ == "__main__":
     poker1.compare()
     # poker1.printCards()
     poker1.printGraph()
+
