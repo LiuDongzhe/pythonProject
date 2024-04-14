@@ -6,6 +6,7 @@ class player:
         self.hand = []
         self.preHand = []
         self.dropHand = []
+        # self.dropHandIfBe
 
     def sortHand(self):
         tmp = []
