@@ -119,9 +119,15 @@ def clickHand(hand, imageLst, rectLst, dropHand: list):
             # print(f'{hand} clicked!')
         elif rectLst[n].y == 610:  # Add the position of double click to array of drop
             dropHand.append(rectLst[n])
-            # print(dropHand)
+
+            #print(int((1200 - dropHand[0].x) / 85))
+            hand.remove(hand[int((1200 - dropHand[0].x) / 85)-1])
+            #hand.append()
+
             del rectLst[n]
             del imageLst[n]
+            print(hand)
+            print(len(rectLst))
 
         else:
             rectLst[n].y = 650
