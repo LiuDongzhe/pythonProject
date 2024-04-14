@@ -60,6 +60,7 @@ screen.fill((0, 100, 0))
 pg.display.set_caption('MahJong')
 
 imageLst = loadImage(p.hand)
+
 #AIimageLst = loadImage(a.AIHand)
 rectLst = loadRect(p.hand)
 #rectAILst = loadRect(a.AIHand)
@@ -80,7 +81,9 @@ if p.dropHand is not None:
 while True:
     screen.fill((0, 100, 0))  # The color of screen
     handShow(screen, imageLst, rectLst)
+
 #    AIHandShow(screen, AIimageLst, rectAILst)
+
     if p.preHand is not None:
         preHandShow(screen, preImageLst, preRectLst)
     if p.dropHand is not None:
