@@ -27,7 +27,7 @@ while Check_interface == 1:
             pg.quit()
             sys.exit()
         if event.type == pg.MOUSEBUTTONDOWN:
-            if 770 <= event.pos[0] <= 930 and 770 <= event.pos[1] <= 860:
+            if 770 <= event.pos[0] <= 930 and 700 <= event.pos[1] <= 860:
                 Check_interface = 0
 
     pg.display.update()
@@ -92,6 +92,7 @@ while True:
         if event.type == pg.MOUSEBUTTONDOWN:
             clickHand(p.hand, imageLst, rectLst, p.dropHand)
             clickHand(p.preHand, preImageLst, preRectLst, p.dropHand)  # click prehand has bug
+            handShow(screen, imageLst, rectLst)
 
     pg.display.update()
     pg.display.flip()
