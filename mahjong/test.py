@@ -14,15 +14,29 @@ def loadImage(card):
 
     return imageLst
 
+def AIloadimage(card):
+    AIimageLst = []
+    if isinstance(card, list):
+        for subCard in card:
+            AIimage = pg.image.load(f'image/32/fulltiles/{subCard}.png').convert_alpha()
+            rotated_AIimage = pg.transform.rotate(AIimage, 180)
+            AIimageLst.append(rotated_AIimage)
+    else:
+        AIimage = pg.image.load(f'image/32/fulltiles/{card}.png').convert_alpha()
+        rotated_AIimage = pg.transform.rotate(AIimage, 180)
+        AIimageLst.append(rotated_AIimage)
+
+
+    return AIimageLst
 
 def loadImageDropDesk(card):
     imageLst = []
 
     if isinstance(card, list):
         for subCard in card:
-            imageLst.append(pg.image.load(f'image/32/fulltiles/{subCard}.png').convert_alpha())
+            imageLst.append(pg.image.load(f'image/64/fulltiles/{subCard}.png').convert_alpha())
     else:
-        imageLst.append(pg.image.load(f'image/32/fulltiles/{card}.png').convert_alpha())
+        imageLst.append(pg.image.load(f'image/64/fulltiles/{card}.png').convert_alpha())
 
     return imageLst
 
@@ -43,7 +57,14 @@ def loadRect(imageLst):
 
 def loadAIRect(AIimageLst):
     rectAILst = []
-
+    i = 32 * (len(AIimageLst))
+    if isinstance(AIimageLst,list):
+        for _ in AIimageLst:
+            rectAILst.append(pg.Rect(i,200,34,48))
+            i -= 32
+    else:
+        rectAILst.append(pg.Rect(1200, 200,32,48))
+    return rectAILst
 
 def loadDroppedCard(imageLst):
     dropList = []
@@ -98,9 +119,15 @@ def clickHand(hand, imageLst, rectLst, dropHand: list):
             # print(f'{hand} clicked!')
         elif rectLst[n].y == 610:  # Add the position of double click to array of drop
             dropHand.append(rectLst[n])
-            # print(dropHand)
+
+            #print(int((1200 - dropHand[0].x) / 85))
+            hand.remove(hand[int((1200 - dropHand[0].x) / 85)-1])
+            #hand.append()
+
             del rectLst[n]
             del imageLst[n]
+            print(hand)
+            print(len(rectLst))
 
         else:
             rectLst[n].y = 650
