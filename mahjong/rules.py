@@ -3,6 +3,7 @@ tiles = [1, 2, 3, 4, 5, 6, 7, 8, 9] * 4
 random.shuffle(tiles)
 player_hand = []
 for _ in range(13):
+
     player_hand.append(tiles.pop())
 def winCheck(hand):
     if len(hand) == 14:
