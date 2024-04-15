@@ -95,39 +95,3 @@ if __name__ == '__main__':
     a.AIsortHand()
     p.sortHand()
     print(p.hand)
-
-# AI策略
-
-import random
-
-# 定义麻将牌
-tiles = ['1万', '2万', '3万', '4万', '5万', '6万', '7万', '8万', '9万',
-         '1筒', '2筒', '3筒', '4筒', '5筒', '6筒', '7筒', '8筒', '9筒',
-         '1条', '2条', '3条', '4条', '5条', '6条', '7条', '8条', '9条',
-         '东风', '南风', '西风', '北风', '红中', '发财', '白板']
-
-
-# 定义简单的AI策略，随机选择出牌
-def ai_play_hand():
-    return random.choice(tiles)
-
-
-# 主程序
-if __name__ == '__main__':
-    print("欢迎来到麻将游戏！")
-    while True:
-        print("\n玩家1的回合:")
-        player_tile = input("请选择要打出的牌：")
-
-        # AI回合
-        print("\nAI的回合:")
-        ai_tile = ai_play_hand()
-        print("AI打出了：", ai_tile)
-        # 判断胜负
-        winner = random.choice(["玩家1", "AI"])
-        print("\n{}获胜！".format(winner))
-        play_again = input("\n是否要再玩一局？(y/n)")
-        if play_again.lower() != 'y':
-            break
-    print("谢谢游玩麻将游戏！")
-    print(a.AIhand)
