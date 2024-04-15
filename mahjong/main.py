@@ -32,9 +32,9 @@ if p.preHand is not None:
     preImageLst = loadImage(p.preHand)
     preRectLst = loadRect(p.preHand)
 
-if a.AIpreHand is not None:
-    preImageAILst = loadImage(a.AIHand)
-    preRectAILst = loadRect(a.AIHand)
+# if a.AIpreHand is not None:
+#     preImageAILst = loadImage(a.AIHand)
+#     preRectAILst = loadRect(a.AIHand)
 
 # From Cao
 if p.dropHand is not None:
@@ -44,7 +44,7 @@ if p.dropHand is not None:
 while True:
     screen.fill((0, 100, 0))  # The color of screen
     handShow(screen, imageLst, rectLst)
-    AIHandShow(screen, AIimageLst, rectAILst)
+    # AIHandShow(screen, AIimageLst, rectAILst)
     if p.preHand is not None:
         preHandShow(screen, preImageLst, preRectLst)
     if p.dropHand is not None:
@@ -60,4 +60,4 @@ while True:
     pg.display.update()
     pg.display.flip()
 
-# test
+# AI
