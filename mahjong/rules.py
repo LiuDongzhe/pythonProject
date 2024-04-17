@@ -2,15 +2,17 @@ def winCheck(hand):
     # 胡牌检查
     if len(hand) % 3 != 2:
         return False
+    else:
+        return True
 
     # 统计每种牌的数量
     count = {}
+
     for tile in hand:
         if tile not in count:
             count[tile] = 1
         else:
             count[tile] += 1
-
     # 判断是否有顺子或刻子
     for tile, num in count.items():
         if num >= 2:
