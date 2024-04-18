@@ -95,4 +95,3 @@ if __name__ == '__main__':
     a.AIsortHand()
     p.sortHand()
     print(p.hand)
-    print(a.AIhand)
