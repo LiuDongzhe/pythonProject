@@ -89,6 +89,14 @@ def handShow(screen, imageLst, rectLst):
         # i -= 85
 
 
+def AddPreHandToHand(preHand,hand):
+    if preHand == list():
+        pass
+    elif preHand != list() and (len(hand) - 1) % 3 == 1:
+        hand.append(preHand)
+        sortHand(hand)
+
+
 def AIHandShow(screen, AIimageLst, rectAILst):
     for subImage, subRect in zip(AIimageLst, rectAILst):
         screen.blit(subImage, subRect)
@@ -118,12 +126,12 @@ def clickHand(hand, imageLst, rectLst, dropHand: list):
             rectLst[n].y -= 20
             # print(f'{hand} clicked!')
         elif rectLst[n].y == 610:  # Add the position of double click to array of drop
-            dropHand.append(rectLst[n])
+            dropHand.append(hand[n])
 
             #print(int((1200 - dropHand[0].x) / 85))
-            hand.remove(hand[int((1200 - dropHand[0].x) / 85)-1])
+            #hand.remove(hand[int((1200 - dropHand[0].x) / 85)-1])
             #hand.append()
-
+            hand.pop(n)
             del rectLst[n]
             del imageLst[n]
             print(hand)
@@ -132,6 +140,7 @@ def clickHand(hand, imageLst, rectLst, dropHand: list):
         else:
             rectLst[n].y = 650
         n -= 1
+        print(dropHand)
     return dropHand
 
 # def clickPreHand(preHand, preImageLst, rect, preDropHand:list):

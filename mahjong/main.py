@@ -34,12 +34,6 @@ while Check_interface == 1:
     pg.display.flip()
 
 
-
-
-
-
-
-
 m = mahjong()
 p = player()
 #a = AI()
@@ -93,8 +87,9 @@ while True:
             pg.quit()
             sys.exit()
         if event.type == pg.MOUSEBUTTONDOWN:
+            AddPreHandToHand(p.preHand,p.hand)
             clickHand(p.hand, imageLst, rectLst, p.dropHand)
-            clickHand(p.preHand, preImageLst, preRectLst, p.dropHand)  # click prehand has bug
+            #clickHand(p.preHand, preImageLst, preRectLst, p.dropHand)  # click prehand has bug
             handShow(screen, imageLst, rectLst)
 
     pg.display.update()
