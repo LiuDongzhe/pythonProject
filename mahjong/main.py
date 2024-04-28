@@ -2,7 +2,7 @@ import pygame as pg
 from mahjong import mahjong
 from player import player
 from player import AI
-from test import *
+from windowShow import *
 
 pg.init()
 size = width, height = 1600, 900
