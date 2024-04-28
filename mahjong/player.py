@@ -4,7 +4,7 @@ from mahjong import mahjong
 class player:
     def __init__(self):
         self.hand = []
-        self.preHand = []
+        self.preHand = None
         self.dropHand = []
         # self.dropHandIfBe
 

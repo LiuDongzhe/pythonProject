@@ -4,40 +4,10 @@ from player import player
 from player import AI
 from test import *
 
-pg.init()
-size = width, height = 1600, 900
-screen = pg.display.set_mode(size)
-pg.display.set_caption('interface')
-
-interface = pg.image.load('interface/start.png')
-interface = pg.transform.smoothscale(interface, (160, 160))
-
-#==
-background = pg.image.load('interface/interface.png')
-background = pg.transform.smoothscale(background, (1600, 900))
-
-Check_interface = 1
-
-while Check_interface == 1:
-    screen.blit(background, (0, 0))
-    screen.blit(interface, (770, 700))
-    #screen.fill(background, (0, 0))
-    for event in pg.event.get():
-        if event.type == pg.QUIT:
-            pg.quit()
-            sys.exit()
-        if event.type == pg.MOUSEBUTTONDOWN:
-            if 770 <= event.pos[0] <= 930 and 700 <= event.pos[1] <= 860:
-                Check_interface = 0
-
-    pg.display.update()
-    pg.display.flip()
-
-
-
-
-
-
+#restart()
+computer_interface()
+#player_interface()
+#interface()
 
 
 m = mahjong()
