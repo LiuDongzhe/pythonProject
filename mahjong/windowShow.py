@@ -14,6 +14,7 @@ def loadImage(card):
 
     return imageLst
 
+
 def AIloadimage(card):
     AIimageLst = []
     if isinstance(card, list):
@@ -26,8 +27,8 @@ def AIloadimage(card):
         rotated_AIimage = pg.transform.rotate(AIimage, 180)
         AIimageLst.append(rotated_AIimage)
 
-
     return AIimageLst
+
 
 def loadImageDropDesk(card):
     imageLst = []
@@ -58,13 +59,14 @@ def loadRect(imageLst):
 def loadAIRect(AIimageLst):
     rectAILst = []
     i = 32 * (len(AIimageLst))
-    if isinstance(AIimageLst,list):
+    if isinstance(AIimageLst, list):
         for _ in AIimageLst:
-            rectAILst.append(pg.Rect(i,200,34,48))
+            rectAILst.append(pg.Rect(i, 200, 34, 48))
             i -= 32
     else:
-        rectAILst.append(pg.Rect(1200, 200,32,48))
+        rectAILst.append(pg.Rect(1200, 200, 32, 48))
     return rectAILst
+
 
 def loadDroppedCard(imageLst):
     dropList = []
@@ -89,7 +91,7 @@ def handShow(screen, imageLst, rectLst):
         # i -= 85
 
 
-def AddPreHandToHand(preHand,hand):
+def AddPreHandToHand(preHand, hand):
     if preHand == list():
         pass
     elif preHand != list() and (len(hand) - 1) % 3 == 1:
@@ -128,9 +130,9 @@ def clickHand(hand, imageLst, rectLst, dropHand: list):
         elif rectLst[n].y == 610:  # Add the position of double click to array of drop
             dropHand.append(hand[n])
 
-            #print(int((1200 - dropHand[0].x) / 85))
-            #hand.remove(hand[int((1200 - dropHand[0].x) / 85)-1])
-            #hand.append()
+            # print(int((1200 - dropHand[0].x) / 85))
+            # hand.remove(hand[int((1200 - dropHand[0].x) / 85)-1])
+            # hand.append()
             hand.pop(n)
             del rectLst[n]
             del imageLst[n]
@@ -142,6 +144,7 @@ def clickHand(hand, imageLst, rectLst, dropHand: list):
         n -= 1
         print(dropHand)
     return dropHand
+
 
 # def clickPreHand(preHand, preImageLst, rect, preDropHand:list):
 #     mousePos = pg.mouse.get_pos()
@@ -160,3 +163,117 @@ def clickHand(hand, imageLst, rectLst, dropHand: list):
 #             rect[n].y = 650
 #
 #     return preDropHand
+
+def interface():
+    pg.init()
+    size = width, height = 1600, 900
+    screen = pg.display.set_mode(size)
+    pg.display.set_caption('interface')
+
+    interface = pg.image.load('interface/start.png')
+    interface = pg.transform.smoothscale(interface, (160, 160))
+
+    # ==
+    background = pg.image.load('interface/interface.png')
+    background = pg.transform.smoothscale(background, (1600, 900))
+
+    Check_interface = 1
+
+    while Check_interface == 1:
+        screen.blit(background, (0, 0))
+        screen.blit(interface, (770, 700))
+        # screen.fill(background, (0, 0))
+        for event in pg.event.get():
+            if event.type == pg.QUIT:
+                pg.quit()
+                sys.exit()
+            if event.type == pg.MOUSEBUTTONDOWN:
+                if 770 <= event.pos[0] <= 930 and 700 <= event.pos[1] <= 860:
+                    Check_interface = 0
+
+        pg.display.update()
+        pg.display.flip()
+
+
+def player_interface():
+    pg.init()
+    size = width, height = 1600, 900
+    screen = pg.display.set_mode(size)
+    pg.display.set_caption('player_interface')
+
+    player_interface = pg.image.load('win/win.png')
+    player_interface = pg.transform.smoothscale(player_interface, (1600, 900))
+
+    Restart = pg.image.load('win/restart.png')
+    Restart = pg.transform.smoothscale(Restart, (160, 160))
+
+    Check_interface = 1
+
+    while Check_interface == 1:
+        screen.blit(player_interface, (0, 0))
+        screen.blit(Restart, (730, 600))
+        for event in pg.event.get():
+            if event.type == pg.QUIT:
+                pg.quit()
+                sys.exit()
+            if event.type == pg.MOUSEBUTTONDOWN:
+                if 740 <= event.pos[0] <= 900 and 600 <= event.pos[1] <= 760:
+                    Check_interface = 0
+
+        pg.display.update()
+        pg.display.flip()
+
+
+def computer_interface():
+    pg.init()
+    size = width, height = 1600, 900
+    screen = pg.display.set_mode(size)
+    pg.display.set_caption('player_interface')
+
+    computer_interface = pg.image.load('win/winning_of_computer.png')
+    computer_interface = pg.transform.smoothscale(computer_interface, (1600, 900))
+
+    Restart = pg.image.load('win/restart.png')
+    Restart = pg.transform.smoothscale(Restart, (160, 160))
+
+    Check_interface = 1
+
+    while Check_interface == 1:
+        screen.blit(computer_interface, (0, 0))
+        screen.blit(Restart, (730, 600))
+        for event in pg.event.get():
+            if event.type == pg.QUIT:
+                pg.quit()
+                sys.exit()
+            if event.type == pg.MOUSEBUTTONDOWN:
+                if 740 <= event.pos[0] <= 900 and 600 <= event.pos[1] <= 760:
+                    Check_interface = 0
+
+        pg.display.update()
+        pg.display.flip()
+
+
+def restart():
+    pg.init()
+    size = width, height = 1600, 900
+
+    screen = pg.display.set_mode(size)
+    pg.display.set_caption('Restart')
+
+    Restart = pg.image.load('win/restart.png')
+    Restart = pg.transform.smoothscale(Restart, (60, 60))
+
+    Check_interface = 1
+
+    while Check_interface == 1:
+        screen.blit(Restart, (30, 30))
+        for event in pg.event.get():
+            if event.type == pg.QUIT:
+                pg.quit()
+                sys.exit()
+            if event.type == pg.MOUSEBUTTONDOWN:
+                if 30 <= event.pos[0] <= 90 and 30 <= event.pos[1] <= 90:
+                    Check_interface = 0
+
+        pg.display.update()
+        pg.display.flip()
