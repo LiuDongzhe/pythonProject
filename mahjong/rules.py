@@ -55,6 +55,14 @@ def winCheck(hand, lastCard):
         return False
 
 
+def gangCheck():
+    pass
+
+
+def pengCheck():
+    pass
+
+
 if __name__ == '__main__':
     p = player()
     # p.hand = ['circle2', 'circle2', 'circle3', 'circle4', 'bamboo1', 'bamboo2', 'bamboo3', 'wan1', 'wan2', 'wan3']
