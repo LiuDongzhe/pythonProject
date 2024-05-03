@@ -66,6 +66,8 @@ def pengCheck():
 if __name__ == '__main__':
     p = player()
     # p.hand = ['circle2', 'circle2', 'circle3', 'circle4', 'bamboo1', 'bamboo2', 'bamboo3', 'wan1', 'wan2', 'wan3']
-    p.hand = ['a1', 'a1', 'a1', 'a2', 'a2', 'a2', 'w1', 'w2', 'w2', 'w2']
+    # p.hand = ['a1', 'a1', 'a1', 'a2', 'a2', 'a2', 'w1', 'w2', 'w2', 'w2']
+    # p.hand = ['a1', 'a1', 'a2', 'a2', 'a3', 'a3', 'a4']
+    p.hand = ['a1', 'a2', 'a2', 'a3', 'a3', 'a4', 'w1']
 
-    print(winCheck(p.hand, 'w3'))
+    print(winCheck(p.hand, 'w1'))

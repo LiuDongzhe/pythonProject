@@ -4,6 +4,9 @@ from player import player
 from player import AI
 from windowShow import *
 
+
+player_interface()
+
 pg.init()
 size = width, height = 1600, 900
 screen = pg.display.set_mode(size)
