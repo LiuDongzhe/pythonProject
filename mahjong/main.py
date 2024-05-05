@@ -35,6 +35,7 @@ while Check_interface == 1:
 
 dropHand = []
 
+
 m = mahjong()
 p = player()
 #a = AI()
@@ -86,6 +87,9 @@ while True:
             dropHand.append(clickHand(p.hand, p.preHand, imageLst, preImageLst, rectLst, preRectLst))
             AddPreHandToHand(p.preHand,p.hand)
 
+            AddPreHandToHand(p.preHand,p.hand)
+            clickHand(p.hand, imageLst, rectLst, p.dropHand)
+            #clickHand(p.preHand, preImageLst, preRectLst, p.dropHand)  # click prehand has bug
             handShow(screen, imageLst, rectLst)
     if dropHand is not []:
         dropImageLst = loadImageDropDesk(dropHand)
