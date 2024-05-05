@@ -45,43 +45,43 @@ class player:
 
 class AI:
     def __init__(self):
-        self.AIHand = []
-        self.AIpreHand = None
-        self.AIdropHand = None
+        self.hand = []
+        self.preHand = None
+        self.dropHand = None
 
     def AIsortHand(self):
-        AItmp = []
-        AIothers = ['west', 'south', 'east', 'north', 'red', 'green', 'white']
+        tmp = []
+        others = ['west', 'south', 'east', 'north', 'red', 'green', 'white']
         removeAICards = []
 
-        for card in self.AIHand:
-            if card in AIothers:
-                AItmp.append(card)
+        for card in self.hand:
+            if card in others:
+                tmp.append(card)
                 removeAICards.append(card)
 
         for card in removeAICards:
-            self.AIHand.remove(card)
+            self.hand.remove(card)
 
-        AItmp.sort()
-        self.AIHand.sort(reverse=True)
-        for card in self.AIHand:
-            AItmp.append(card)
-        self.AIHand = AItmp
+        tmp.sort()
+        self.hand.sort(reverse=True)
+        for card in self.hand:
+            tmp.append(card)
+        self.hand = tmp
 
-    def AIgetHand(self):
-        if self.AIpreHand is not None:
-            self.AIHand.append(self.AIpreHand)
+    def getHand(self):
+        if self.preHand is not None:
+            self.hand.append(self.preHand)
 
-    def AIgetPreHand(self, card):
-        self.AIpreHand = card
+    def getPreHand(self, card):
+        self.preHand = card
 
-    def AIdropCard(self, card):
-        if self.AIHand.index(card) and self.AIpreHand == card:
-            self.AIpreHand = None
-        elif self.AIHand.index(card):
-            self.AIHand.remove(card)
-        elif self.AIpreHand == card:
-            self.AIpreHand = None
+    def dropCard(self, card):
+        if self.hand.index(card) and self.preHand == card:
+            self.preHand = None
+        elif self.hand.index(card):
+            self.hand.remove(card)
+        elif self.preHand == card:
+            self.preHand = None
 
 
 if __name__ == '__main__':
