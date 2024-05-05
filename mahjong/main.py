@@ -83,16 +83,18 @@ while True:
             pg.quit()
             sys.exit()
         if event.type == pg.MOUSEBUTTONDOWN:
-            dropHand.append(clickHand(p.hand, p.preHand, imageLst, preImageLst, rectLst, preRectLst))
+            clickHand(p.hand, p.preHand, p.dropHand, imageLst, preImageLst, rectLst, preRectLst)
+            clickHand(p.hand, p.preHand, p.dropHand, imageLst, preImageLst, rectLst, preRectLst)
+            dropHand.append(clickHand(p.hand, p.preHand, p.dropHand, imageLst, preImageLst, rectLst, preRectLst))
             AddPreHandToHand(p.preHand, p.hand)
 
-            AddPreHandToHand(p.preHand, p.hand)
-            clickHand(p.hand, imageLst, rectLst, p.dropHand)
+            #AddPreHandToHand(p.preHand, p.hand)
+            #clickHand(p.hand, imageLst, rectLst, p.dropHand)
             # clickHand(p.preHand, preImageLst, preRectLst, p.dropHand)  # click prehand has bug
             handShow(screen, imageLst, rectLst)
-    if dropHand is not []:
+    if len(dropHand) > 0:
         dropImageLst = loadImageDropDesk(dropHand)
-        dropDropLst = loadRectDropDesk(dropHand)
+        dropDropLst = loadRectDropDesk(dropImageLst)
 
     pg.display.update()
     pg.display.flip()
