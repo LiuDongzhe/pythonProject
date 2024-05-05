@@ -33,8 +33,6 @@ while Check_interface == 1:
     pg.display.update()
     pg.display.flip()
 
-dropHand = []
-
 
 m = mahjong()
 p = player()
@@ -69,6 +67,11 @@ if p.preHand is not None:
 #    preImageAILst = loadImage(a.AIHand)
 #    preRectAILst = loadRect(a.AIHand)
 
+# From Cao
+if p.dropHand is not None:
+    dropImageLst = loadImage(p.dropHand)
+    dropDropLst = loadRect(p.dropHand)
+
 while True:
     screen.fill((0, 100, 0))  # The color of screen
     handShow(screen, imageLst, rectLst)
@@ -77,22 +80,17 @@ while True:
 
     if p.preHand is not None:
         preHandShow(screen, preImageLst, preRectLst)
+    if p.dropHand is not None:
+        dropHandShow(screen, dropImageLst, p.dropHand)
     for event in pg.event.get():
         if event.type == pg.QUIT:
             pg.quit()
             sys.exit()
         if event.type == pg.MOUSEBUTTONDOWN:
-            dropHand.append(clickHand(p.hand, p.preHand, imageLst, preImageLst, rectLst, preRectLst))
-            AddPreHandToHand(p.preHand,p.hand)
-
             AddPreHandToHand(p.preHand,p.hand)
             clickHand(p.hand, imageLst, rectLst, p.dropHand)
             #clickHand(p.preHand, preImageLst, preRectLst, p.dropHand)  # click prehand has bug
             handShow(screen, imageLst, rectLst)
-    if dropHand is not []:
-        dropImageLst = loadImageDropDesk(dropHand)
-        dropDropLst = loadRectDropDesk(dropHand)
-
 
     pg.display.update()
     pg.display.flip()

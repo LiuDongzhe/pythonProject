@@ -1,82 +1,85 @@
-def winCheck(hand):
-    # 胡牌检查
-    if len(hand) % 3 != 2:
-        return False
-    else:
+from binaryTree import *
+from player import *
+
+
+def sortHand(hand):
+    tmp = []
+    others = ['west', 'south', 'east', 'north', 'red', 'green', 'white']
+    removeCards = []
+
+    for card in hand:
+        if card in others:
+            tmp.append(card)
+            removeCards.append(card)
+
+    for card in removeCards:
+        hand.remove(card)
+
+    tmp.sort()
+    hand.sort(reverse=True)
+    for card in hand:
+        tmp.append(card)
+    hand = tmp
+
+    return hand
+
+
+def winCheck(hand, lastCard):
+    pairScore = 0
+    hand.append(lastCard)
+    hand = sortHand(hand)
+
+    bTree = binaryTree(hand)
+
+    for nod in bTree.treeLst[::-1]:
+        if nod.num != 0:
+            if nod.num == 2 and pairScore == 0:
+                nod.num -= 2
+
+            if nod == nod.parent.left and nod.parent == nod.parent.parent.left:
+                while nod.num > 0 and nod.parent.num > 0 and nod.parent.parent.num > 0:
+                    nod.num -= 1
+                    nod.parent.num -= 1
+                    nod.parent.parent.num -= 1
+
+            if nod.num == 3:
+                nod.num -= 3
+
+    checkScore = 0
+    for i in bTree.treeLst:
+        checkScore += i.num
+
+    if checkScore == 0:
         return True
-
-    # 统计每种牌的数量
-    count = {}
-
-    for tile in hand:
-        if tile not in count:
-            count[tile] = 1
-        else:
-            count[tile] += 1
-    # 判断是否有顺子或刻子
-    for tile, num in count.items():
-        if num >= 2:
-            # 如果有两张相同的牌，则可以组成刻子
-            if num % 3 == 0:
-                count[tile] -= 3
-            else:
-                # 如果只有一张相同的牌，则需要有其他牌与之组成顺子
-                for i in range(1, 8):
-                    if (tile + i in count and count[tile + i] > 0) or (tile - i in count and count[tile - i] > 0):
-                        count[tile] -= 1
-                        if tile + i in count:
-                            count[tile + i] -= 1
-                        else:
-                            count[tile - i] -= 1
-                        break
-        else:
-                    return False
-
-    # 判断是否还有剩余的单张牌
-    for num in count.values():
-        if num > 0:
-            return False
-
-    return True
-
-
-def gangCheck(hand):
-    # 杠牌检查
-    if len(hand) % 3 != 0:
+    else:
         return False
 
-    # 统计每种牌的数量
-    count = {}
-    for tile in hand:
-        if tile not in count:
-            count[tile] = 1
-        else:
-            count[tile] += 1
 
-    # 判断是否有四张相同的牌
-    for num in count.values():
-        if num == 4:
-            return True
+def gangCheck(hand, lastCard):
+    hand.append(lastCard)
+    hand = sortHand(hand)
 
-    return False
-
-
-def pengCheck(hand):
-    # 碰牌检查
-    if len(hand) % 3 != 0:
+    if hand.count(lastCard) == 4:
+        return True
+    else:
         return False
 
-    # 统计每种牌的数量
-    count = {}
-    for tile in hand:
-        if tile not in count:
-            count[tile] = 1
-        else:
-            count[tile] += 1
 
-    # 判断是否有三张相同的牌
-    for num in count.values():
-        if num == 3:
-            return True
+def pengCheck(hand, lastCard):
+    hand.append(lastCard)
+    hand = sortHand(hand)
 
-    return False
+    if hand.count(lastCard) == 3:
+        return True
+    else:
+        return False
+
+
+if __name__ == '__main__':
+    p = player()
+    # p.hand = ['circle2', 'circle2', 'circle3', 'circle4', 'bamboo1', 'bamboo2', 'bamboo3', 'wan1', 'wan2', 'wan3']
+    # p.hand = ['a1', 'a1', 'a1', 'a2', 'a2', 'a2', 'w1', 'w2', 'w2', 'w2']
+    # p.hand = ['a1', 'a1', 'a2', 'a2', 'a3', 'a3', 'a4']
+    p.hand = ['a1', 'a2', 'a2', 'a3', 'a3', 'a4', 'w1']
+
+    print(winCheck(p.hand, 'w1'))
