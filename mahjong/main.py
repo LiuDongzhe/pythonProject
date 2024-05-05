@@ -77,8 +77,6 @@ while True:
 
     if p.preHand is not None:
         preHandShow(screen, preImageLst, preRectLst)
-    if p.dropHand is not None:
-        dropHandShow(screen, dropImageLst, p.dropHand)
     for event in pg.event.get():
         if event.type == pg.QUIT:
             pg.quit()
