@@ -55,12 +55,24 @@ def winCheck(hand, lastCard):
         return False
 
 
-def gangCheck():
-    pass
+def gangCheck(hand, lastCard):
+    hand.append(lastCard)
+    hand = sortHand(hand)
+
+    if hand.count(lastCard) == 4:
+        return True
+    else:
+        return False
 
 
-def pengCheck():
-    pass
+def pengCheck(hand, lastCard):
+    hand.append(lastCard)
+    hand = sortHand(hand)
+
+    if hand.count(lastCard) == 3:
+        return True
+    else:
+        return False
 
 
 if __name__ == '__main__':
