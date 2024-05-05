@@ -29,16 +29,16 @@ def AIloadimage(card):
 
     return AIimageLst
 
-def loadImageDropDesk(card):
-    imageLst = []
+def loadImageDropDesk(dropHand):
+    dropImageLst = []
 
-    if isinstance(card, list):
-        for subCard in card:
-            imageLst.append(pg.image.load(f'image/64/fulltiles/{subCard}.png').convert_alpha())
+    if isinstance(dropHand, list):
+        for subCard in dropHand:
+            dropImageLst.append(pg.image.load(f'image/32/fulltiles/{subCard}.png').convert_alpha())
     else:
-        imageLst.append(pg.image.load(f'image/64/fulltiles/{card}.png').convert_alpha())
+        dropImageLst.append(pg.image.load(f'image/32/fulltiles/{card}.png').convert_alpha())
 
-    return imageLst
+    return dropImageLst
 
 
 def loadRect(imageLst):
@@ -54,6 +54,17 @@ def loadRect(imageLst):
 
     return rectLst
 
+def loadRectDropDesk(dropImageLst):
+    dropRectLst = []
+    y = len(dropImageLst) % 14
+    for n in range(len(dropImageLst),0,-1):
+        x = (n / 14 + 1)
+        if n % 14 == 0:
+            y = 14
+        else:
+            y -= 1
+        dropRectLst.append(pg.Rect( 200 + y*32, 200 + x*42, 86, 133))
+    return dropRectLst
 
 def loadAIRect(AIimageLst):
     rectAILst = []
@@ -117,28 +128,36 @@ def dropHandShow(screen, imageLst, dropList):
         # i -= 85
 
 
-def clickHand(hand, imageLst, rectLst, dropHand: list):
+def clickHand(hand, prehand, handImageLst, preImageLst, handRectLst, preRectLst):
     mousePos = pg.mouse.get_pos()
 
-    n = len(rectLst) - 1
+    n = len(handRectLst) + 1
     while n >= 0:
-        if rectLst[n].collidepoint(mousePos) and rectLst[n].y > 610:
-            rectLst[n].y -= 20
-            # print(f'{hand} clicked!')
-        elif rectLst[n].y == 610:  # Add the position of double click to array of drop
-            dropHand.append(hand[n])
-
-            #print(int((1200 - dropHand[0].x) / 85))
-            #hand.remove(hand[int((1200 - dropHand[0].x) / 85)-1])
-            #hand.append()
-            hand.pop(n)
-            del rectLst[n]
-            del imageLst[n]
-            print(hand)
-            print(len(rectLst))
-
+        if n == len(handRectLst) + 1:
+            if preRectLst.collidepoint(mousePos) and preRectLst.y > 610:
+                preRectLst.y -= 20
+            elif preRectLst.y == 610:  # Add the position of double click to array of drop
+                dropHand.append(prehand)
+                prehand.pop(0)
+                del preRectLst
+                del preImageLst
+                print(prehand)
+            else:
+                preRectLst.y = 650
         else:
-            rectLst[n].y = 650
+            if handRectLst[n].collidepoint(mousePos) and handRectLst[n].y > 610:
+                handRectLst[n].y -= 20
+                # print(f'{hand} clicked!')
+            elif handRectLst[n].y == 610:  # Add the position of double click to array of drop
+                dropHand.append(hand[n])
+                hand.pop(n)
+                del handRectLst[n]
+                del handImageLst[n]
+                print(hand)
+                print(len(handRectLst))
+
+            else:
+                handRectLst[n].y = 650
         n -= 1
         print(dropHand)
     return dropHand
