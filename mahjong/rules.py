@@ -26,6 +26,10 @@ def sortHand(hand):
 
 def winCheck(hand, lastCard):
     pairScore = 0
+    # print(type(lastCard))
+    if lastCard is None or hand is None:
+        return False
+
     hand.append(lastCard)
     hand = sortHand(hand)
 
@@ -56,6 +60,8 @@ def winCheck(hand, lastCard):
 
 
 def gangCheck(hand, lastCard):
+    if lastCard is None or hand is None:
+        return False
     hand.append(lastCard)
     hand = sortHand(hand)
 
@@ -66,6 +72,8 @@ def gangCheck(hand, lastCard):
 
 
 def pengCheck(hand, lastCard):
+    if lastCard is None or hand is None:
+        return False
     hand.append(lastCard)
     hand = sortHand(hand)
 

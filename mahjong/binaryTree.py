@@ -39,7 +39,7 @@ class binaryTree:
 
     def createTree(self):
         if len(self.lst) == 0:
-            print('success')
+            # print('success')
             return True
 
         if self.lst[0] == self.treeLst[-1].val:

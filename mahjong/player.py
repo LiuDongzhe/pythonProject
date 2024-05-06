@@ -1,4 +1,5 @@
 from mahjong import mahjong
+import random
 
 
 class player:
@@ -75,13 +76,22 @@ class AI:
     def getPreHand(self, card):
         self.preHand = card
 
-    def dropCard(self, card):
-        if self.hand.index(card) and self.preHand == card:
-            self.preHand = None
-        elif self.hand.index(card):
-            self.hand.remove(card)
-        elif self.preHand == card:
-            self.preHand = None
+    # def dropCard(self, card):
+    #     if self.hand.index(card) and self.preHand == card:
+    #         self.preHand = None
+    #     elif self.hand.index(card):
+    #         self.hand.remove(card)
+    #     elif self.preHand == card:
+    #         self.preHand = None
+
+    def dropCard(self):
+        tmp = self.hand
+        tmp.append(self.preHand)
+        t = random.choice(tmp)
+        tmp.remove(t)
+        self.hand = tmp
+
+        return t
 
 
 if __name__ == '__main__':

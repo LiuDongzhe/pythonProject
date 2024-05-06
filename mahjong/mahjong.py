@@ -4,12 +4,12 @@ import random
 class mahjong:
     def __init__(self):
         suits = ['circle', 'bamboo', 'wan']
-        winds = ['north', 'west', 'south', 'east']
-        others = ['red', 'white', 'green']
+        # winds = ['north', 'west', 'south', 'east']
+        # others = ['red', 'white', 'green']
         cards = [i for i in range(1, 10)]
         self.deck = [f'{suit}{card}' for suit in suits for card in cards]
-        self.deck += winds
-        self.deck += others
+        # self.deck += winds
+        # self.deck += others
         self.deck *= 4
         self.shuffleCards()
 
